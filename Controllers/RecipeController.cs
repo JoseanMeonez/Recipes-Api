@@ -20,14 +20,16 @@ namespace Recipes_Api.Controllers
 		public async Task<IActionResult> Get()
 		{
 			var recipes = await _recipeRepository.GetAll();
-			return Ok();
+			return Ok(recipes);
 		}
 
 		// GET api/<RecipeController>/5
 		[HttpGet("{id}")]
-		public string Get(int id)
+		public async Task<IActionResult> Get(int id)
 		{
-			return "value";
+			var recipe = new Recipe() { Id = id };
+			var res = await _recipeRepository.GetOne(recipe.Id);
+			return Ok(res);
 		}
 
 		// POST api/<RecipeController>

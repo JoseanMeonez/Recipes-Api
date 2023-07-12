@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Recipes_Api.Data;
 using Recipes_Api.Repositories;
 
 namespace Recipes_Api.Controllers
@@ -24,9 +25,11 @@ namespace Recipes_Api.Controllers
 
 		// GET api/<PersonController>/5
 		[HttpGet("{id}")]
-		public string Get(int id)
+		public async Task<IActionResult> Get(int id)
 		{
-			return "value";
+			var person = new Person() { Id = id };
+			var res = await _personRepository.GetPerson(person.Id);
+			return Ok(res);
 		}
 
 		// POST api/<PersonController>

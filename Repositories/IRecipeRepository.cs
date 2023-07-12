@@ -5,7 +5,7 @@ namespace Recipes_Api.Repositories
 	public interface IRecipeRepository
 	{
 		// Get an unique recipe
-		Task<Recipe> GetOne(Guid id);
+		Task<Recipe> GetOne(int id);
 
 		// Get all the recipes on the DB
 		Task<IEnumerable<Recipe>> GetAll();
@@ -17,6 +17,6 @@ namespace Recipes_Api.Repositories
 		Task Update(Recipe recipe);
 
 		// Delete a recipe
-		Task Delete(Guid id);
+		Task Delete(int id);
 	}
 }

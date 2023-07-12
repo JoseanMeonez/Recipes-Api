@@ -1,4 +1,5 @@
-﻿using Recipes_Api.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Recipes_Api.Data;
 
 namespace Recipes_Api.Repositories
 {
@@ -11,14 +12,14 @@ namespace Recipes_Api.Repositories
 			_recipesContext = recipesContext;
 		}
 
-		public Task<Recipe> GetOne(Guid id)
+		public Task<Recipe> GetOne(int id)
 		{
-			throw new NotImplementedException();
+			return _recipesContext.Recipes.FirstOrDefaultAsync(a => a.Id.Equals(id));
 		}
 
-		public Task<IEnumerable<Recipe>> GetAll()
+		public async Task<IEnumerable<Recipe>> GetAll()
 		{
-			throw new NotImplementedException();
+			return await _recipesContext.Recipes.ToListAsync();
 		}
 
 		public async Task<Recipe> Create(Recipe recipe)
@@ -33,7 +34,7 @@ namespace Recipes_Api.Repositories
 			throw new NotImplementedException();
 		}
 
-		public async Task Delete(Guid id)
+		public async Task Delete(int id)
 		{
 			//var recipe = new Recipe() { Id = id };
 			//_recipesContext.Recipes.Remove(recipe);

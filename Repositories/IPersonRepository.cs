@@ -4,7 +4,7 @@ namespace Recipes_Api.Repositories
 {
 	public interface IPersonRepository
 	{
-		Task<Person> GetPerson();
+		Task<Person> GetPerson(int id);
 
 		Task<IEnumerable<Person>> GetPeople();
 
@@ -12,6 +12,6 @@ namespace Recipes_Api.Repositories
 
 		Task Update(Person person);
 
-		Task Delete(Guid id);
+		Task Delete(int id);
 	}
 }

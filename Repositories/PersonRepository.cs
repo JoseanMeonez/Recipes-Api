@@ -16,7 +16,7 @@ namespace Recipes_Api.Repositories
 			throw new NotImplementedException();
 		}
 
-		public Task Delete(Guid id)
+		public Task Delete(int id)
 		{
 			throw new NotImplementedException();
 		}
@@ -26,9 +26,9 @@ namespace Recipes_Api.Repositories
 			return await _recipesContext.People.ToListAsync();
 		}
 
-		public Task<Person> GetPerson()
+		public Task<Person> GetPerson(int id)
 		{
-			throw new NotImplementedException();
+			return _recipesContext.People.FirstOrDefaultAsync(a => a.Id.Equals(id));
 		}
 
 		public Task Update(Person person)
