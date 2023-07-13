@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Recipes_Api.Data;
+﻿namespace Recipes_Api.Data;
 
 public partial class Person
 {
