@@ -14,7 +14,7 @@ namespace Recipes_Api.Repositories
 		Task<Recipe> Create(Recipe recipe);
 
 		// Update a recipe
-		Task Update(Recipe recipe);
+		Task<Recipe> Update(Recipe recipe);
 
 		// Delete a recipe
 		Task Delete(int id);

@@ -29,9 +29,11 @@ namespace Recipes_Api.Repositories
 			return res.Entity;
 		}
 
-		public Task Update(Recipe recipe)
+		public async Task<Recipe> Update(Recipe recipe)
 		{
-			throw new NotImplementedException();
+			var res = _recipesContext.Recipes.Update(recipe);
+			await _recipesContext.SaveChangesAsync();
+			return res.Entity;
 		}
 
 		public async Task Delete(int id)

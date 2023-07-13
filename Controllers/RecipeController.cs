@@ -34,31 +34,53 @@ namespace Recipes_Api.Controllers
 
 		// POST api/<RecipeController>
 		[HttpPost]
-		public async Task<ActionResult<Recipe>> Create(Recipe recipe)
+		public async Task<ActionResult<Recipe>> Create([FromBody]RecipeInput data)
 		{
-			var data = new Recipe()
+			var recipe = new Recipe()
 			{
-				Title = recipe.Title,
-				Description = recipe.Description,
-				DateCreated = recipe.DateCreated,
-				PersonId = recipe.PersonId
+				Title = data.Title,
+				Description = data.Description,
+				DateCreated = data.DateCreated,
+				PersonId = data.PersonId
 			};
-			await _recipeRepository.Create(data);
+			await _recipeRepository.Create(recipe);
 			return Created(string.Empty, recipe.Id);
 		}
 
 		// PUT api/<RecipeController>/5
-		[HttpPut("{id}")]
-		public void Put(int id, [FromBody] string value)
+		[HttpPut]
+		public async Task<ActionResult<Recipe>> Put([FromBody] RecipeInput data)
 		{
-			throw new NotImplementedException();
+			// Verifyng that all of the model's attributes are sended
+      if (ModelState.IsValid) {
+				// Verifyng Id
+				if (data.Id != null) {
+					// Filling recipe's data
+					var recipe = new Recipe()
+					{
+						Id = (int)data.Id,
+						Title = data.Title,
+						Description = data.Description,
+						DateCreated = data.DateCreated,
+						PersonId = data.PersonId
+					};
+
+					var response = await _recipeRepository.Update(recipe);
+					return Ok(response);
+				} else {
+					return BadRequest("No se pasó el ID de la receta para actualzarla.");
+				}       
+      } else {
+				return BadRequest("Uno o más campos ingresados son nulos o no se enviaron, por favor asergurate que todos lo campos lleven su valor correspondiente.");
+			}
+
 		}
 
 		// DELETE api/<RecipeController>/5
 		[HttpDelete("{id}")]
 		public void Delete(int id)
 		{
-			throw new NotImplementedException();
+			
 		}
 	}
 }
