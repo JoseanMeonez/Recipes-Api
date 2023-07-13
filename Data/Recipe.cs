@@ -1,6 +1,6 @@
 ﻿namespace Recipes_Api.Data;
 
-public partial class Recipe
+public class Recipe
 {
     public int Id { get; set; }
 
